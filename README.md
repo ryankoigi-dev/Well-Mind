@@ -6,7 +6,7 @@ Well-Mind is an innovative project designed to enhance mental health and wellnes
 
 - **Intelligent Prompt System:** Uses MGX prompt technology to generate personalized mental wellness exercises and reflections.
 - **Modular Design:** Easily extensible for new prompt types and mental health tools.
-- **Modern Stack:** Built with [your primary languages here, e.g., Python, JavaScript, etc.], making it easy to contribute and customize.
+- **Modern Stack:** Built with [frontend basic HTML,CSS Javascript, Python, MySQL open ai], making it easy to contribute and customize.
 
 ## MGX Prompt Integration
 
