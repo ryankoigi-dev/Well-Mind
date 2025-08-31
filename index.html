@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WellMind - Your Mental Wellness Companion</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="app">
+        <!-- Navigation -->
+        <nav class="nav">
+            <div class="nav-brand">
+                <i class="fas fa-brain"></i>
+                <span>WellMind</span>
+            </div>
+            <div class="nav-menu">
+                <button class="nav-item active" data-tab="dashboard">
+                    <i class="fas fa-home"></i>
+                    <span>Dashboard</span>
+                </button>
+                <button class="nav-item" data-tab="mood">
+                    <i class="fas fa-heart"></i>
+                    <span>Mood</span>
+                </button>
+                <button class="nav-item" data-tab="meditation">
+                    <i class="fas fa-leaf"></i>
+                    <span>Meditate</span>
+                </button>
+                <button class="nav-item" data-tab="journal">
+                    <i class="fas fa-book-open"></i>
+                    <span>Journal</span>
+                </button>
+                <button class="nav-item" data-tab="insights">
+                    <i class="fas fa-chart-line"></i>
+                    <span>Insights</span>
+                </button>
+            </div>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="main">
+            <!-- Dashboard Tab -->
+            <div id="dashboard" class="tab-content active">
+                <div class="dashboard-header">
+                    <h1>Welcome back, <span id="username">Friend</span></h1>
+                    <p class="dashboard-subtitle">How are you feeling today?</p>
+                </div>
+                
+                <div class="dashboard-grid">
+                    <div class="card quick-mood">
+                        <h3>Quick Mood Check</h3>
+                        <div class="mood-quick-select">
+                            <button class="mood-btn" data-mood="5">😄</button>
+                            <button class="mood-btn" data-mood="4">🙂</button>
+                            <button class="mood-btn" data-mood="3">😐</button>
+                            <button class="mood-btn" data-mood="2">😕</button>
+                            <button class="mood-btn" data-mood="1">😢</button>
+                        </div>
+                    </div>
+
+                    <div class="card streak">
+                        <h3>Current Streak</h3>
+                        <div class="streak-counter">
+                            <span class="streak-number" id="current-streak">0</span>
+                            <span class="streak-label">days</span>
+                        </div>
+                    </div>
+
+                    <div class="card meditation-time">
+                        <h3>Meditation Time</h3>
+                        <div class="time-display">
+                            <span class="time-number" id="total-meditation">0</span>
+                            <span class="time-label">minutes</span>
+                        </div>
+                    </div>
+
+                    <div class="card recent-entries">
+                        <h3>Recent Journal Entries</h3>
+                        <div id="recent-entries-list" class="entries-preview">
+                            <p class="no-entries">No entries yet. Start journaling!</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="wellness-tip">
+                    <div class="tip-icon">💡</div>
+                    <div class="tip-content">
+                        <h4>Daily Wellness Tip</h4>
+                        <p id="daily-tip">Take a moment to breathe deeply and notice how you're feeling right now.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Mood Tab -->
+            <div id="mood" class="tab-content">
+                <div class="mood-header">
+                    <h2>Track Your Mood</h2>
+                    <p>Understanding your emotions is the first step to better mental health</p>
+                </div>
+
+                <div class="mood-tracker">
+                    <div class="mood-scale">
+                        <h3>How are you feeling right now?</h3>
+                        <div class="mood-options">
+                            <button class="mood-option" data-value="5">
+                                <span class="mood-emoji">😄</span>
+                                <span class="mood-label">Excellent</span>
+                            </button>
+                            <button class="mood-option" data-value="4">
+                                <span class="mood-emoji">🙂</span>
+                                <span class="mood-label">Good</span>
+                            </button>
+                            <button class="mood-option" data-value="3">
+                                <span class="mood-emoji">😐</span>
+                                <span class="mood-label">Okay</span>
+                            </button>
+                            <button class="mood-option" data-value="2">
+                                <span class="mood-emoji">😕</span>
+                                <span class="mood-label">Not Great</span>
+                            </button>
+                            <button class="mood-option" data-value="1">
+                                <span class="mood-emoji">😢</span>
+                                <span class="mood-label">Difficult</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="mood-details">
+                        <textarea id="mood-notes" placeholder="What's on your mind? (optional)" rows="4"></textarea>
+                        <button id="save-mood" class="btn-primary">Save Mood Entry</button>
+                    </div>
+                </div>
+
+                <div class="mood-history">
+                    <h3>Mood History</h3>
+                    <div id="mood-chart" class="chart-container">
+                        <canvas id="moodCanvas" width="400" height="200"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Meditation Tab -->
+            <div id="meditation" class="tab-content">
+                <div class="meditation-header">
+                    <h2>Meditation & Mindfulness</h2>
+                    <p>Find your center with guided meditation sessions</p>
+                </div>
+
+                <div class="meditation-grid">
+                    <div class="card meditation-timer">
+                        <h3>Meditation Timer</h3>
+                        <div class="timer-display">
+                            <div class="timer-circle">
+                                <span id="timer-minutes">5</span>
+                                <span class="timer-colon">:</span>
+                                <span id="timer-seconds">00</span>
+                            </div>
+                        </div>
+                        
+                        <div class="timer-controls">
+                            <div class="duration-selector">
+                                <button class="duration-btn active" data-duration="300">5 min</button>
+                                <button class="duration-btn" data-duration="600">10 min</button>
+                                <button class="duration-btn" data-duration="900">15 min</button>
+                                <button class="duration-btn" data-duration="1200">20 min</button>
+                            </div>
+                            
+                            <div class="timer-actions">
+                                <button id="start-timer" class="btn-primary">Start</button>
+                                <button id="pause-timer" class="btn-secondary" style="display: none;">Pause</button>
+                                <button id="reset-timer" class="btn-outline">Reset</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card meditation-sessions">
+                        <h3>Guided Sessions</h3>
+                        <div class="sessions-list">
+                            <div class="session-item">
+                                <div class="session-info">
+                                    <h4>Breathing Exercise</h4>
+                                    <p>5 minutes • Beginner</p>
+                                </div>
+                                <button class="btn-outline">Start</button>
+                            </div>
+                            <div class="session-item">
+                                <div class="session-info">
+                                    <h4>Body Scan</h4>
+                                    <p>10 minutes • Intermediate</p>
+                                </div>
+                                <button class="btn-outline">Start</button>
+                            </div>
+                            <div class="session-item">
+                                <div class="session-info">
+                                    <h4>Mindful Walking</h4>
+                                    <p>15 minutes • All levels</p>
+                                </div>
+                                <button class="btn-outline">Start</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Journal Tab -->
+            <div id="journal" class="tab-content">
+                <div class="journal-header">
+                    <h2>Daily Journal</h2>
+                    <p>Reflect on your day and track your thoughts</p>
+                </div>
+
+                <div class="journal-container">
+                    <div class="journal-form">
+                        <div class="form-group">
+                            <label for="journal-title">Entry Title</label>
+                            <input type="text" id="journal-title" placeholder="What's on your mind today?">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="journal-content">Your Thoughts</label>
+                            <textarea id="journal-content" rows="8" placeholder="Write about your day, feelings, goals, or anything that comes to mind..."></textarea>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>Gratitude (What are you grateful for today?)</label>
+                            <div class="gratitude-inputs">
+                                <input type="text" id="gratitude-1" placeholder="First thing you're grateful for">
+                                <input type="text" id="gratitude-2" placeholder="Second thing you're grateful for">
+                                <input type="text" id="gratitude-3" placeholder="Third thing you're grateful for">
+                            </div>
+                        </div>
+                        
+                        <button id="save-journal" class="btn-primary">Save Entry</button>
+                    </div>
+
+                    <div class="journal-entries">
+                        <h3>Previous Entries</h3>
+                        <div id="journal-list" class="entries-list">
+                            <p class="no-entries">No journal entries yet. Start writing!</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Insights Tab -->
+            <div id="insights" class="tab-content">
+                <div class="insights-header">
+                    <h2>Your Wellness Insights</h2>
+                    <p>Track your progress and discover patterns</p>
+                </div>
+
+                <div class="insights-grid">
+                    <div class="card stats">
+                        <h3>This Week</h3>
+                        <div class="stats-grid">
+                            <div class="stat-item">
+                                <span class="stat-number" id="week-entries">0</span>
+                                <span class="stat-label">Journal Entries</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-number" id="week-meditation">0</span>
+                                <span class="stat-label">Minutes Meditated</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-number" id="week-mood">--</span>
+                                <span class="stat-label">Avg Mood</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card mood-trends">
+                        <h3>Mood Trends</h3>
+                        <div id="trend-chart" class="trend-container">
+                            <canvas id="trendCanvas" width="300" height="150"></canvas>
+                        </div>
+                    </div>
+
+                    <div class="card achievements">
+                        <h3>Achievements</h3>
+                        <div id="achievements-list" class="achievements-container">
+                            <div class="achievement locked">
+                                <i class="fas fa-medal"></i>
+                                <span>First Journal Entry</span>
+                            </div>
+                            <div class="achievement locked">
+                                <i class="fas fa-fire"></i>
+                                <span>7-Day Streak</span>
+                            </div>
+                            <div class="achievement locked">
+                                <i class="fas fa-zen"></i>
+                                <span>Meditation Master</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Success Modal -->
+    <div id="success-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-icon">✨</div>
+            <h3 id="modal-title">Success!</h3>
+            <p id="modal-message">Your entry has been saved.</p>
+            <button id="modal-close" class="btn-primary">Continue</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
